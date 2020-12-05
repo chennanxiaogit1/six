@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var ajax = {
+        request: function (obj) {
+          //创键对象
+          var xhr;
+          if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+          } else {
+            //IE  低版本使用
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+
+          //   初始化对象
+          //   拼接参数
+          var params = "";
+          for (var key in obj.data) {
+            params += key + "=" + obj.data[key] + "&";
+          }
+          params = params.substr(0, params.length - 1);
+          console.log(params);
+          if (obj.method == "get") {
+            obj.url = obj.url + "?" + params;
+            console.log(obj.url);
+            xhr.open(obj.method, obj.url);
+
+            //发送请求
+            xhr.send();
+          } else {
+            xhr.open(obj.method, obj.url);
+            xhr.setRequestHeader(
+              "Content-type",
+              "application/x-www-form-urlencoded"
+            );
+            xhr.send(params);
+          }
+          //监视请求的状态
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              obj.callback(xhr.responseText);
+            }
+          };
+        },
+      };
+      /*   ajax.request({
+        method: "get",
+        url: "http://musicapi.leanapp.cn/search",
+        data: {
+          keywords: "2",
+        },
+        callback: function (options) {
+          console.log(JSON.parse(options));
+        },
+      }); */
+    </script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Ajax(options) {
+        //创建ajax对象
+        var xhr = new XMLHttpRequest();
+        //初始化对象
+        // 拼接参数
+        var params = "";
+        for (var key in options.data) {
+          // keyword=zhangsan&
+          params += key + "=" + options.data.type + "&";
+        }
+        // 截取字符串  去掉最后一个参数的&
+        params = params.substr(0, params.length - 1);
+        console.log(params);
+        // 如果请求方式  get
+        if (options.type == "get") {
+          options.url += "?" + params;
+          //   console.log(options.url);
+          xhr.open(options.type, options.url);
+          //发送请求
+          xhr.send();
+        } else {
+          xhr.open(options.type, options.url);
+          console.log(options.url);
+          xhr.setRequestHeader("Content-Type", options.head.ContentType);
+          if (options.head.ContentType == "application/json") {
+            xhr.send(JSON.stringify(options.data));
+          } else {
+            //发送请求
+            xhr.send(params);
+          }
+        }
+
+        //监听xhr是否发送完毕
+        xhr.addEventListener("load", function () {
+          if (xhr.status == 200) console.log(JSON.parse(xhr.responseText));
+        });
+      }
+      /* 
+      Ajax({
+        //请求方式
+        type: "post",
+        //请求地址
+        url: "http://musicapi.leanapp.cn/dj/recommend/type",
+        //请求参数
+        data: {
+          type: "2",
+        },
+        // 发送给服务器端的数据是什么类型的
+        head: {
+          ContentType: "application/x-www-form-urlencoded",
+        },
+      }); */
+    </script>
+  </body>
+</html>

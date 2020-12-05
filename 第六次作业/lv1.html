@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      li {
+        list-style: none;
+      }
+      .content {
+        width: 860px;
+        margin: 100px auto;
+        overflow: hidden;
+        /* background-color: pink; */
+      }
+      .content .title li {
+        float: left;
+        width: 270px;
+      }
+      .main {
+        width: 860px;
+      }
+      .main span {
+        display: inline-block;
+        padding-left: 10px;
+        width: 270px;
+        height: 20px;
+        line-height: 20px;
+      }
+    </style>
+  </head>
+  <input type="text" id="song" value="" />
+  <input type="button" value="搜索" id="btn" />
+  <body>
+    <div class="content">
+      <ul class="title">
+        <li>音乐标题</li>
+        <li>歌手</li>
+        <li>专辑</li>
+      </ul>
+      <div class="main"></div>
+    </div>
+    <script src="lv1.js"></script>
+  </body>
+</html>
